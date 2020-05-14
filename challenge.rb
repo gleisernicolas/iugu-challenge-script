@@ -14,10 +14,7 @@ def complete_transaction(account_number, value)
   result -= 300 if result < 0
 
   @accounts[account_number] = result
-
-  @accounts
 end
-
 
 @accounts = transform_array(File.readlines(ARGV[0]))
 transactions = File.readlines(ARGV[1]).map do |line|
@@ -27,8 +24,6 @@ end
 transactions.each do |transaction|
   complete_transaction(transaction[0].to_s, transaction[1])
 end
-
-
 
 @accounts.each do |key, value|
   print "#{key},#{value}\n"
