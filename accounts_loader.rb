@@ -5,7 +5,10 @@ class AccountsLoader
     arrays = accounts_lines.map do |string|
       values = string.gsub('\n', '').split(',')
       abort('Account must contain initial number and funds') if values.count < 2
-      values = [values.first, values.last.to_i]
+      amount = Integer(values.last) rescue abort('All initial funds must be a numeric')
+      account_number = Integer(values.first) rescue abort('All account numbers must be numeric')
+
+      values = [account_number.to_s, amount]
     end
   
     Hash[*arrays.flatten]
